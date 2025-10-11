@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^24.7.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "socket.io-client": "^4.8.1"
   }
 }
