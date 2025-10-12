@@ -1,5 +1,4 @@
 import { SokcetLocation } from "../../enums/socketLocation";
-import { ALERT } from "../../messages/alert";
 import { SubCommandParams } from "../types";
 import { checkLocation } from "../utils";
 import create from "./create";
@@ -9,18 +8,21 @@ export default function handleRoomCommand({
   commandParam,
 }: SubCommandParams) {
   switch (subCommand) {
-    case "create":
+    case "status":
+      if (!checkLocation([SokcetLocation.ROOM])) return;
+
+    case "start":
+      // 방장인지도 확인해야함
+      if (!checkLocation([SokcetLocation.ROOM])) return;
+
+    case "list":
       if (!checkLocation([SokcetLocation.LOBBY])) return;
-      create();
-      return;
 
     case "join":
       if (!checkLocation([SokcetLocation.LOBBY])) return;
 
-    case "leave":
+    case "create":
       if (!checkLocation([SokcetLocation.LOBBY])) return;
-
-    default:
-      console.log(ALERT.INVALID_COMMAND);
+      create();
   }
 }
