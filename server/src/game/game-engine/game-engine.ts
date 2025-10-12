@@ -3,7 +3,7 @@ import Player from './entity/player';
 import { JOBS } from './types/job';
 
 export class GameEngine {
-  private deck: Card[];
+  private courtDeck: Card[];
   private playerList: Player[];
 
   constructor(private playerNames: string[]) {
@@ -13,13 +13,28 @@ export class GameEngine {
     this.shufflePlayerList();
   }
 
+  drawCard(amount: number): Card[] {
+    let cards: Card[] = [];
+
+    for (let i = 0; i < amount; i++) {
+      cards.push(this.courtDeck.pop()!);
+    }
+
+    return cards;
+  }
+
+  putBackCard(cards: Card[]) {
+    this.courtDeck.push(...cards);
+    this.shuffleDeck();
+  }
+
   private initPlayer() {
     this.playerNames.forEach((name) => {
       this.playerList.push(
         new Player({
           name,
           coin: this.playerNames.length === 2 ? 1 : 2,
-          deck: [this.deck.pop()!, this.deck.pop()!],
+          deck: [this.courtDeck.pop()!, this.courtDeck.pop()!],
         }),
       );
     });
@@ -28,15 +43,18 @@ export class GameEngine {
   private initDeck() {
     JOBS.forEach((job) => {
       for (let i = 0; i < 3; i++) {
-        this.deck.push(new Card(job));
+        this.courtDeck.push(new Card(job));
       }
     });
   }
 
   private shuffleDeck() {
-    for (let i = this.deck.length - 1; i > 0; i--) {
+    for (let i = this.courtDeck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+      [this.courtDeck[i], this.courtDeck[j]] = [
+        this.courtDeck[j],
+        this.courtDeck[i],
+      ];
     }
   }
 
