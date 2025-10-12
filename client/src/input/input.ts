@@ -1,14 +1,9 @@
-import readline from "node:readline";
+import { input } from "@inquirer/prompts";
 import routeInput from "./inputRourter";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  prompt: "> ",
-});
-rl.prompt();
+export async function startCLI() {
+  const answer = await input({ message: "> " });
+  routeInput(answer.trim());
+}
 
-rl.on("line", (command: string) => {
-  routeInput(command);
-  rl.prompt();
-});
+startCLI();
