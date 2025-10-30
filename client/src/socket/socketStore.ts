@@ -19,7 +19,7 @@ class SocketStore {
     }
     return SocketStore.instance;
   }
-
+  
   set(state: Partial<SocketState>) {
     this.state = { ...this.state, ...state };
   }
