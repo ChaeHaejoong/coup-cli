@@ -13,5 +13,6 @@ export const ROOM = {
 
   INVALID_VALUE: `유효한 숫자를 입력해주세요`,
 
-  CREATE_ROOM: `방 생성 완료!`,
+  CREATE_ROOM: (name: string, count: number) =>
+    `방 생성 완료!\n` + `${name}(${count}명)`,
 };

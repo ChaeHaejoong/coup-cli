@@ -8,6 +8,7 @@ type SocketState = {
 class SocketStore {
   private static instance: SocketStore;
   private state: SocketState = {
+    //* 인스턴스 생성 시점에 클라이언트는 로비에 있을 수 밖에 없음 */
     location: SokcetLocation.LOBBY,
   };
 

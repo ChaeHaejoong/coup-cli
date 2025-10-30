@@ -9,6 +9,6 @@ export const commandMap = {
   },
   name: {
     set: NameCmds.set,
-    get: NameCmds.get
-  }
+    get: NameCmds.get,
+  },
 };
